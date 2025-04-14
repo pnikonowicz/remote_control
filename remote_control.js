@@ -1,3 +1,5 @@
+const mediaSeekTimeDelta = 10 // seconds
+
 async function captureYouTubeAudio() {
     // Request screen capture with audio
     console.log('requesting stream');
@@ -20,6 +22,26 @@ function addRemoteControlButton() {
     logo.parentNode.insertBefore(button, logo.nextSibling);
 }
 
+function attachForwardAndBackControls() {
+    const movePlaybackCurrentTime = (timeDelta) =>  {
+        const video = document.querySelector('video');
+        if(video.seeking) {
+            console.log('skipping event: seeking')
+            return;
+        }
+        video.fastSeek(video.currentTime + timeDelta)
+    }
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'ArrowLeft') {
+            movePlaybackCurrentTime(-mediaSeekTimeDelta)
+        } else if (event.key === 'ArrowRight') {
+            movePlaybackCurrentTime(mediaSeekTimeDelta)
+        }
+      });
+}
+
 console.log("Remote Control Start Loading: " + document.getElementById('logo-icon'));
 
 addRemoteControlButton();
+attachForwardAndBackControls();
