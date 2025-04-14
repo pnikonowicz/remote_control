@@ -8,7 +8,7 @@ async function captureYouTubeAudio() {
     console.log('got stream: ' + stream);
 }
 
-function remoteControlMain() {
+function addRemoteControlButton() {
     const button = document.createElement("button");
     button.textContent = "Remote Control";
 
@@ -22,4 +22,4 @@ function remoteControlMain() {
 
 console.log("Remote Control Start Loading: " + document.getElementById('logo-icon'));
 
-remoteControlMain();
+addRemoteControlButton();
