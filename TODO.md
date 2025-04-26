@@ -13,3 +13,5 @@ document.querySelectorAll('*').forEach(element => {
   });
 });
 ```
+
+it's difficult to find where keyboard events are assigned. consider replacing the entire video with a different player
