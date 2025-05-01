@@ -1,6 +1,7 @@
 # Description
 
 ![screenshot](https://github.com/pnikonowicz/remote_control/blob/main/docs/screenshot.jpg)
+
 Adds quick buttons to appear on youtube so that you can access common functions with just a mouse.
 
 ## Current Features
