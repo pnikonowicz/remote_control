@@ -1,3 +1,13 @@
+# Description
+
+![screenshot](https://github.com/pnikonowicz/remote_control/blob/main/docs/screenshot.jpg)
+Adds quick buttons to appear on youtube so that you can access common functions with just a mouse.
+
+## Current Features
+
+* Boost - increases gain so that you don't need to touch anything for videos that have low volume
+* Seek (In progress) - allows quick 15 second rewind ability
+
 # development
 
 1. open `about:debugging#/runtime/this-firefox` in firefox
