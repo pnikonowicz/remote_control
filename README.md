@@ -15,3 +15,8 @@ Adds quick buttons to appear on youtube so that you can access common functions 
 2. click the `load temporary add-ons` button
 3. point the file explorer window to the `manifest.json` from this project
 4. a boost button will appear near the top
+
+## devops
+
+1. build: `docker build -f .devcontainer/Dockerfile -t events-ai:dev .`
+2. push: `docker push pnikonowicz/events-ai:dev`
