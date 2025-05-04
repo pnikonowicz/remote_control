@@ -7,7 +7,13 @@ Adds quick buttons to appear on youtube so that you can access common functions 
 ## Current Features
 
 * Boost - increases gain so that you don't need to touch anything for videos that have low volume
-* Seek (In progress) - allows quick 15 second rewind ability
+
+## TODO (Contributions Welcome)
+
+* Seek - allows quick 15 second rewind ability
+* Speed - allows 1.5 speed up
+* Custom config screen - allows control over what controls appear
+
 
 # development
 
