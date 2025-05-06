@@ -46,7 +46,7 @@ class BoostButton {
     constructor(button) {
         this.button = button
         this.initializeStyles();
-        this.setToUnboostedState();
+        this.off();
     }
 
     // Initialize button styles
@@ -63,12 +63,12 @@ class BoostButton {
         this.button.style.textAlign = "center";
     }
 
-    setToBoostedState() {
+    on() {
         this.button.textContent = "UnBoost";
         this.button.style.backgroundColor = "#16a34a"; // Green when boosted
     }
 
-    setToUnboostedState() {
+    off() {
         this.button.textContent = "Boost";
         this.button.style.backgroundColor = "#6b7280"; // Gray when unboosted
     }
@@ -86,12 +86,12 @@ function addRemoteControlButton() {
         console.log('Button was clicked!');
         if(isBoosted) {
             audioBooster.unboost();
-            boostButton.setToUnboostedState();
+            boostButton.off();
 
             isBoosted = false;
         } else {
             audioBooster.boost();
-            boostButton.setToBoostedState();
+            boostButton.on();
 
             isBoosted = true;
         }
