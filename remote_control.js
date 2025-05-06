@@ -80,6 +80,10 @@ function addRemoteControlButton() {
     const audioBooster = new AudioBooster(video);
     const boostButton = new BoostButton(boostButtonElement);
     
+    const logo = document.getElementById('logo')
+    logo.parentNode.insertBefore(speedUpButtonElement, logo.nextSibling);
+    logo.parentNode.insertBefore(boostButtonElement, logo.nextSibling);
+
     var isBoosted = false;
 
     boostButtonElement.addEventListener('click', function() {
@@ -96,9 +100,6 @@ function addRemoteControlButton() {
             isBoosted = true;
         }
     });
-
-    const logo = document.getElementById('logo')
-    logo.parentNode.insertBefore(boostButtonElement, logo.nextSibling);
 }
 
 console.log("Remote Control Start Loading: " + document.getElementById('logo-icon'));
