@@ -75,14 +75,14 @@ class BoostButton {
 }
 
 function addRemoteControlButton() {
-    const button = document.createElement("button");
+    const boostButtonElement = document.createElement("button");
     const video = document.querySelector('video');
     const audioBooster = new AudioBooster(video);
-    const boostButton = new BoostButton(button);
+    const boostButton = new BoostButton(boostButtonElement);
     
     var isBoosted = false;
 
-    button.addEventListener('click', function() {
+    boostButtonElement.addEventListener('click', function() {
         console.log('Button was clicked!');
         if(isBoosted) {
             audioBooster.unboost();
