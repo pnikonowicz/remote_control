@@ -43,8 +43,11 @@ class AudioBooster {
 }
 
 class BoostButton {
-    constructor(button) {
+    constructor(button, enabledName, disabledName) {
         this.button = button
+        this.enabledName = enabledName
+        this.disabledName = disabledName
+
         this.initializeStyles();
         this.off();
     }
@@ -64,12 +67,12 @@ class BoostButton {
     }
 
     on() {
-        this.button.textContent = "UnBoost";
+        this.button.textContent = this.enabledName;
         this.button.style.backgroundColor = "#16a34a"; // Green when boosted
     }
 
     off() {
-        this.button.textContent = "Boost";
+        this.button.textContent = this.disabledName;
         this.button.style.backgroundColor = "#6b7280"; // Gray when unboosted
     }
 }
@@ -78,7 +81,7 @@ function addRemoteControlButton() {
     const boostButtonElement = document.createElement("button");
     const video = document.querySelector('video');
     const audioBooster = new AudioBooster(video);
-    const boostButton = new BoostButton(boostButtonElement);
+    const boostButton = new BoostButton(boostButtonElement, "UnBoost", "Boost");
     
     const logo = document.getElementById('logo')
     logo.parentNode.insertBefore(speedUpButtonElement, logo.nextSibling);
@@ -87,7 +90,7 @@ function addRemoteControlButton() {
     var isBoosted = false;
 
     boostButtonElement.addEventListener('click', function() {
-        console.log('Button was clicked!');
+        console.log('Boost Button was clicked!');
         if(isBoosted) {
             audioBooster.unboost();
             boostButton.off();
