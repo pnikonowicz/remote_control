@@ -1,5 +1,1 @@
-create the firefox extension
-
-# add 15 second rewind button
-
-# add 1.5 time speedup button
+* Custom config screen - allows control over what controls appear
