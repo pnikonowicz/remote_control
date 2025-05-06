@@ -1,3 +1,18 @@
+class SpeedUp {
+    constructor(videoElement) {
+        this.video = videoElement;
+    }
+
+    faster() {
+        this.video.playbackRate = 1.5;
+    }
+
+    slower() {
+        this.video.playbackRate = 1;
+    }
+}
+
+
 class AudioBooster {
     constructor(videoElement) {
         this.video = videoElement;
@@ -82,6 +97,7 @@ function addRemoteControlButton() {
     const speedUpButtonElement = document.createElement("button");
     const video = document.querySelector('video');
     const audioBooster = new AudioBooster(video);
+    const speedUp = new SpeedUp(video);
     const boostButton = new BoostButton(boostButtonElement, "UnBoost", "Boost");
     const speedUpButton = new BoostButton(speedUpButtonElement, "Slower", "Faster");
     
@@ -96,10 +112,12 @@ function addRemoteControlButton() {
         console.log('Speedup Button was clicked!');
         if(isFaster) {
             speedUpButton.off();
+            speedUp.slower();
 
             isFaster = false;
         } else {
             speedUpButton.on();
+            speedUp.faster();
 
             isFaster = true;
         }
