@@ -38,12 +38,6 @@ class AudioBooster {
             this.source.connect(this.audioContext.destination);
 
             this.gainNode = null;
-
-    toggleBoost() {
-        if (this.isBoosted) {
-            this.unboost();
-        } else {
-            this.boost();
         }
     }
 }
