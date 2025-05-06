@@ -110,8 +110,8 @@ function addRemoteControlButton() {
     const audioBooster = new AudioBooster(video);
     const speedUp = new SpeedUp(video);
     const rewind = new Rewind(video);
-    const boostButton = new BoostButton(boostButtonElement, "UnBoost", "Boost");
-    const speedUpButton = new BoostButton(speedUpButtonElement, "Slower", "Faster");
+    const boostButton = new BoostButton(boostButtonElement, "Boost", "Boost");
+    const speedUpButton = new BoostButton(speedUpButtonElement, "Faster", "Faster");
     const rewindButton = new BoostButton(rewindButtonElement, "Rewind", "Rewind")
     
     const logo = document.getElementById('logo')
