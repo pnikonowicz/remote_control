@@ -79,15 +79,31 @@ class BoostButton {
 
 function addRemoteControlButton() {
     const boostButtonElement = document.createElement("button");
+    const speedUpButtonElement = document.createElement("button");
     const video = document.querySelector('video');
     const audioBooster = new AudioBooster(video);
     const boostButton = new BoostButton(boostButtonElement, "UnBoost", "Boost");
+    const speedUpButton = new BoostButton(speedUpButtonElement, "Slower", "Faster");
     
     const logo = document.getElementById('logo')
     logo.parentNode.insertBefore(speedUpButtonElement, logo.nextSibling);
     logo.parentNode.insertBefore(boostButtonElement, logo.nextSibling);
 
     var isBoosted = false;
+    var isFaster = false;
+
+    speedUpButtonElement.addEventListener('click', function() {
+        console.log('Speedup Button was clicked!');
+        if(isFaster) {
+            speedUpButton.off();
+
+            isFaster = false;
+        } else {
+            speedUpButton.on();
+
+            isFaster = true;
+        }
+    });
 
     boostButtonElement.addEventListener('click', function() {
         console.log('Boost Button was clicked!');
