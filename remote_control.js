@@ -4,7 +4,6 @@ class AudioBooster {
         this.audioContext = null;
         this.source = null;
         this.gainNode = null;
-        this.isBoosted = false;
     }
 
     // Initialize AudioContext and source
@@ -20,32 +19,25 @@ class AudioBooster {
             this.init();
         }
 
-        if (!this.isBoosted) {
-            // Create gain node and set boost level
-            this.gainNode = this.audioContext.createGain();
-            this.gainNode.gain.value = 2.0; // Adjustable gain value
+        // Create gain node and set boost level
+        this.gainNode = this.audioContext.createGain();
+        this.gainNode.gain.value = 2.0; // Adjustable gain value
 
-            // Reconnect audio through gain node
-            this.source.disconnect();
-            this.source.connect(this.gainNode);
-            this.gainNode.connect(this.audioContext.destination);
-
-            this.isBoosted = true;
-        }
+        // Reconnect audio through gain node
+        this.source.disconnect();
+        this.source.connect(this.gainNode);
+        this.gainNode.connect(this.audioContext.destination);
     }
 
     // Unboost audio by removing gain
     unboost() {
-        if (this.isBoosted && this.source && this.gainNode) {
+        if (this.source && this.gainNode) {
             // Disconnect gain node and restore default connection
             this.source.disconnect();
             this.gainNode.disconnect();
             this.source.connect(this.audioContext.destination);
 
             this.gainNode = null;
-            this.isBoosted = false;
-        }
-    }
 
     toggleBoost() {
         if (this.isBoosted) {
@@ -93,20 +85,26 @@ function addRemoteControlButton() {
     const video = document.querySelector('video');
     const audioBooster = new AudioBooster(video);
     const boostButton = new BoostButton(button);
+    
+    var isBoosted = false;
 
     button.addEventListener('click', function() {
         console.log('Button was clicked!');
-        if(audioBooster.isBoosted) {
+        if(isBoosted) {
             audioBooster.unboost();
             boostButton.setToUnboostedState();
+
+            isBoosted = false;
         } else {
             audioBooster.boost();
             boostButton.setToBoostedState();
+
+            isBoosted = true;
         }
     });
 
     const logo = document.getElementById('logo')
-    logo.parentNode.insertBefore(button, logo.nextSibling);
+    logo.parentNode.insertBefore(boostButtonElement, logo.nextSibling);
 }
 
 console.log("Remote Control Start Loading: " + document.getElementById('logo-icon'));
