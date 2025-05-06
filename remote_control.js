@@ -79,7 +79,8 @@ class BoostButton {
 
     // Initialize button styles
     initializeStyles() {
-        this.button.style.padding = "10px 20px";
+        this.button.style.padding = "5pt 10pt";
+        this.button.style.margin = "2pt";
         this.button.style.fontSize = "16px";
         this.button.style.border = "none";
         this.button.style.borderRadius = "5px";
@@ -87,7 +88,6 @@ class BoostButton {
         this.button.style.backgroundColor = "#6b7280"; // Gray when unboosted
         this.button.style.color = "#ffffff";
         this.button.style.transition = "background-color 0.3s ease";
-        this.button.style.minWidth = "150px";
         this.button.style.textAlign = "center";
     }
 
