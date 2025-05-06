@@ -1,3 +1,13 @@
+class Rewind {
+    constructor(videoElement) {
+        this.video = videoElement;
+    }
+
+    rewind() {
+        this.video.currentTime = Math.max(0, this.video.currentTime - 15);
+    }
+}
+
 class SpeedUp {
     constructor(videoElement) {
         this.video = videoElement;
@@ -95,18 +105,31 @@ class BoostButton {
 function addRemoteControlButton() {
     const boostButtonElement = document.createElement("button");
     const speedUpButtonElement = document.createElement("button");
+    const rewindButtonElement = document.createElement("button");
     const video = document.querySelector('video');
     const audioBooster = new AudioBooster(video);
     const speedUp = new SpeedUp(video);
+    const rewind = new Rewind(video);
     const boostButton = new BoostButton(boostButtonElement, "UnBoost", "Boost");
     const speedUpButton = new BoostButton(speedUpButtonElement, "Slower", "Faster");
+    const rewindButton = new BoostButton(rewindButtonElement, "Rewind", "Rewind")
     
     const logo = document.getElementById('logo')
+    logo.parentNode.insertBefore(rewindButtonElement, logo.nextSibling);
     logo.parentNode.insertBefore(speedUpButtonElement, logo.nextSibling);
     logo.parentNode.insertBefore(boostButtonElement, logo.nextSibling);
 
     var isBoosted = false;
     var isFaster = false;
+
+    rewindButtonElement.addEventListener('mousedown', function() {
+        rewindButton.on();
+        rewind.rewind();
+    });
+
+    rewindButtonElement.addEventListener('mouseup', function() {
+        rewindButton.off();
+    });
 
     speedUpButtonElement.addEventListener('click', function() {
         console.log('Speedup Button was clicked!');
