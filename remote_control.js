@@ -66,7 +66,7 @@ class AudioBooster {
     }
 }
 
-class BoostButton {
+class Button {
     constructor(button, enabledName, disabledName) {
         this.button = button
         this.enabledName = enabledName
@@ -119,9 +119,9 @@ function addRemoteControlButton() {
     const audioBooster = new AudioBooster();
     const speedUp = new SpeedUp();
     const rewind = new Rewind();
-    const boostButton = new BoostButton(boostButtonElement, "Boost", "Boost");
-    const speedUpButton = new BoostButton(speedUpButtonElement, "Faster", "Faster");
-    const rewindButton = new BoostButton(rewindButtonElement, "Rewind", "Rewind")
+    const boostButton = new Button(boostButtonElement, "Boost", "Boost");
+    const speedUpButton = new Button(speedUpButtonElement, "Faster", "Faster");
+    const rewindButton = new Button(rewindButtonElement, "Rewind", "Rewind")
     
     const logo = document.getElementById('logo')
     logo.parentNode.insertBefore(rewindButtonElement, logo.nextSibling);
