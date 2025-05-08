@@ -1,47 +1,46 @@
 class Rewind {
-    constructor(videoElement) {
-        this.video = videoElement;
+    constructor() {
+        
     }
 
-    rewind() {
-        this.video.currentTime = Math.max(0, this.video.currentTime - 15);
+    rewind(videoElement) {
+        videoElement.currentTime = Math.max(0, videoElement.currentTime - 15);
     }
 }
 
 class SpeedUp {
-    constructor(videoElement) {
-        this.video = videoElement;
+    constructor() {
+        
     }
 
-    faster() {
-        this.video.playbackRate = 1.5;
+    faster(videoElement) {
+        videoElement.playbackRate = 1.5;
     }
 
-    slower() {
-        this.video.playbackRate = 1;
+    slower(videoElement) {
+        videoElement.playbackRate = 1;
     }
 }
 
 
 class AudioBooster {
-    constructor(videoElement) {
-        this.video = videoElement;
+    constructor() {
         this.audioContext = null;
         this.source = null;
         this.gainNode = null;
     }
 
     // Initialize AudioContext and source
-    init() {
+    init(videoElement) {
         this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        this.source = this.audioContext.createMediaElementSource(this.video);
+        this.source = this.audioContext.createMediaElementSource(videoElement);
         this.source.connect(this.audioContext.destination); // Default connection
     }
 
     // Boost audio by applying gain
-    boost() {
+    boost(videoElement) {
         if (!this.audioContext) {
-            this.init();
+            this.init(videoElement);
         }
 
         // Create gain node and set boost level
@@ -102,14 +101,24 @@ class BoostButton {
     }
 }
 
+function performIfVideoIsPresent(operation) {
+    return function() {
+        const video = document.querySelector('video');
+        if(video != null) {
+            operation(video);
+        } else {
+            console.log("no video. no operation performed");
+        }
+    }
+}
+
 function addRemoteControlButton() {
     const boostButtonElement = document.createElement("button");
     const speedUpButtonElement = document.createElement("button");
     const rewindButtonElement = document.createElement("button");
-    const video = document.querySelector('video');
-    const audioBooster = new AudioBooster(video);
-    const speedUp = new SpeedUp(video);
-    const rewind = new Rewind(video);
+    const audioBooster = new AudioBooster();
+    const speedUp = new SpeedUp();
+    const rewind = new Rewind();
     const boostButton = new BoostButton(boostButtonElement, "Boost", "Boost");
     const speedUpButton = new BoostButton(speedUpButtonElement, "Faster", "Faster");
     const rewindButton = new BoostButton(rewindButtonElement, "Rewind", "Rewind")
@@ -122,44 +131,44 @@ function addRemoteControlButton() {
     var isBoosted = false;
     var isFaster = false;
 
-    rewindButtonElement.addEventListener('mousedown', function() {
+    rewindButtonElement.addEventListener('mousedown', performIfVideoIsPresent(function(videoElement) {
         rewindButton.on();
-        rewind.rewind();
-    });
+        rewind.rewind(videoElement);
+    }));
 
-    rewindButtonElement.addEventListener('mouseup', function() {
+    rewindButtonElement.addEventListener('mouseup', performIfVideoIsPresent(function(videoElement) {
         rewindButton.off();
-    });
+    }));
 
-    speedUpButtonElement.addEventListener('click', function() {
+    speedUpButtonElement.addEventListener('click', performIfVideoIsPresent(function(videoElement) {
         console.log('Speedup Button was clicked!');
         if(isFaster) {
             speedUpButton.off();
-            speedUp.slower();
+            speedUp.slower(videoElement);
 
             isFaster = false;
         } else {
             speedUpButton.on();
-            speedUp.faster();
+            speedUp.faster(videoElement);
 
             isFaster = true;
         }
-    });
+    }));
 
-    boostButtonElement.addEventListener('click', function() {
+    boostButtonElement.addEventListener('click', performIfVideoIsPresent(function(videoElement) {
         console.log('Boost Button was clicked!');
         if(isBoosted) {
-            audioBooster.unboost();
+            audioBooster.unboost(videoElement);
             boostButton.off();
 
             isBoosted = false;
         } else {
-            audioBooster.boost();
+            audioBooster.boost(videoElement);
             boostButton.on();
 
             isBoosted = true;
         }
-    });
+    }));
 }
 
 console.log("Remote Control Start Loading: " + document.getElementById('logo-icon'));
