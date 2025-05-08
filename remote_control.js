@@ -101,7 +101,7 @@ class BoostButton {
     }
 }
 
-function performIfVideoIsPresent(operation) {
+function invokeIfVideoExists(operation) {
     return function() {
         const video = document.querySelector('video');
         if(video != null) {
@@ -131,16 +131,16 @@ function addRemoteControlButton() {
     var isBoosted = false;
     var isFaster = false;
 
-    rewindButtonElement.addEventListener('mousedown', performIfVideoIsPresent(function(videoElement) {
+    rewindButtonElement.addEventListener('mousedown', invokeIfVideoExists(function(videoElement) {
         rewindButton.on();
         rewind.rewind(videoElement);
     }));
 
-    rewindButtonElement.addEventListener('mouseup', performIfVideoIsPresent(function(videoElement) {
+    rewindButtonElement.addEventListener('mouseup', invokeIfVideoExists(function(videoElement) {
         rewindButton.off();
     }));
 
-    speedUpButtonElement.addEventListener('click', performIfVideoIsPresent(function(videoElement) {
+    speedUpButtonElement.addEventListener('click', invokeIfVideoExists(function(videoElement) {
         console.log('Speedup Button was clicked!');
         if(isFaster) {
             speedUpButton.off();
@@ -155,7 +155,7 @@ function addRemoteControlButton() {
         }
     }));
 
-    boostButtonElement.addEventListener('click', performIfVideoIsPresent(function(videoElement) {
+    boostButtonElement.addEventListener('click', invokeIfVideoExists(function(videoElement) {
         console.log('Boost Button was clicked!');
         if(isBoosted) {
             audioBooster.unboost(videoElement);
