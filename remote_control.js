@@ -131,6 +131,15 @@ function addRemoteControlButton() {
     var isBoosted = false;
     var isFaster = false;
 
+    { // ensure buttons reset when a new video loads
+        const video = document.querySelector('video')
+        video.addEventListener('loadeddata', () => {
+            rewindButton.off();
+            speedUpButton.off();
+            boostButton.off();
+        });
+    }
+
     rewindButtonElement.addEventListener('mousedown', invokeIfVideoExists(function(videoElement) {
         rewindButton.on();
         rewind.rewind(videoElement);
